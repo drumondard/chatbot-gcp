@@ -1,7 +1,6 @@
 from fastapi import FastAPI, Request
 from google.cloud import bigquery
 from dotenv import load_dotenv
-import uvicorn
 import os
 
 # Carrega variáveis do .env
@@ -41,6 +40,7 @@ async def responder(req: Request):
 
     return {"resposta": "Desculpe, não encontrei uma resposta para essa pergunta."}
 
-
 if __name__ == "__main__":
-    uvicorn.run("chatbot_api:app", host="0.0.0.0", port=8000, reload=True)
+    import uvicorn
+    port = int(os.environ.get("PORT", 8080))
+    uvicorn.run("chatbot_api:app", host="0.0.0.0", port=port)

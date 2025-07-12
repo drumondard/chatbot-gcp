@@ -10,8 +10,8 @@ COPY . .
 # Instala dependências
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Expõe a porta 8000
-EXPOSE 8000
+# Expõe a porta 8080
+EXPOSE 8080
 
-# Comando para iniciar a aplicação
-CMD ["uvicorn", "chatbot_api:app", "--host", "0.0.0.0", "--port", "8000"]
+# Comando para iniciar a aplicação na porta 8080
+CMD ["uvicorn", "chatbot_api:app", "--host", "0.0.0.0", "--port", "8080"]

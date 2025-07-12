@@ -1,0 +1,5 @@
+__pycache__/
+.env
+*.json
+*.pyc
+vtal-sandbox-engenharia-bfe3a49a6e20.json

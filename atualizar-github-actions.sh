@@ -1,3 +1,19 @@
+#!/bin/bash
+
+# Configurações
+WORKFLOW_DIR=".github/workflows"
+WORKFLOW_FILE="$WORKFLOW_DIR/cloudrun-deploy.yaml"
+BRANCH="main"
+COMMIT_MSG="🔄 Atualização automática do GitHub Actions CI/CD para Cloud Run"
+
+# Verifica se diretório existe
+if [ ! -d "$WORKFLOW_DIR" ]; then
+  echo "📁 Criando diretório: $WORKFLOW_DIR"
+  mkdir -p "$WORKFLOW_DIR"
+fi
+
+# Cria/Atualiza o arquivo de workflow
+cat > "$WORKFLOW_FILE" << 'EOF'
 name: Deploy Chatbot GCP
 
 on:
@@ -43,3 +59,12 @@ jobs:
             --platform=managed \
             --allow-unauthenticated \
             --update-secrets=GCP_KEY_PATH_DESK=chatbot-key:latest
+EOF
+
+# Git commit e push
+echo "📦 Enviando atualização para o GitHub..."
+git add "$WORKFLOW_FILE"
+git commit -m "$COMMIT_MSG"
+git push origin $BRANCH
+
+echo "✅ CI/CD GitHub Actions atualizado e enviado para o repositório!"
